@@ -8,8 +8,11 @@ class CreateTransactionService {
     this.transactionsRepository = transactionsRepository;
   }
 
-  public execute(): Transaction {
-    // TODO
+  public execute({ title, type, value }: Omit<Transaction, 'id'>): Transaction {
+    const transaction = new Transaction({ title, type, value });
+    const transactionCreated = this.transactionsRepository.create(transaction);
+
+    return transactionCreated;
   }
 }
 
